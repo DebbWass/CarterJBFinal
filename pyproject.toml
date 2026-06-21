@@ -1,0 +1,34 @@
+[project]
+name = "crater"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    # HTTP client — async, used by VendorHttpClient
+    "httpx>=0.27,<1",
+    # Postgres — psycopg3 async + connection pool
+    "psycopg[binary]>=3.2,<4",
+    "psycopg-pool>=3.2,<4",
+    # Redis — async client for watermark store
+    "redis>=5,<6",
+    # Data validation — RawEvent parsing, PipelineSettings
+    "pydantic>=2.7,<3",
+    "pydantic-settings>=2.3,<3",
+    # API — pipeline status/health endpoints
+    "fastapi>=0.115,<1",
+    "uvicorn[standard]>=0.32,<1",
+    # Testing
+    "pytest>=8,<9",
+    "pytest-asyncio>=0.23,<1",
+    "pytest-httpx>=0.30,<1",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/crater"]

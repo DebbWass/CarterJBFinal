@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+.mypy_cache/
+.ruff_cache/
+
+# Local config
+.env
+
+# Scratch data (the vendor's downloaded gzipped JSONL lives in a docker volume,
+# not here — but students may stash exploratory JSON/parquet under data/).
+data/*
+!data/.gitkeep
+
+#defence presentation
+build_presentation.py
+crater_defence.pptx
+crater_presentation.pptx
+crater_speaker_notes.docx
+DEFENCE_PRESENTATION_GUIDE.md
+DEFENCE_PRESENTATION.md
+DEFENCE_QUICK_REFERENCE.md
+DEFENCE_SLIDE_OUTLINE.md
+generate_presentation.py
+SPEAKER_GUIDE.md
+TESTING_MANUAL.md
+~$ater_speaker_notes.docx
+~$crater_presentation.pptx
+
+#testings and reviews
+MANUAL_TESTING_REPORT.md
+PROFESSIONAL_REVIEW.md
+TESTING_MANUAL.md
+TESTING_RESULTS.md
+
