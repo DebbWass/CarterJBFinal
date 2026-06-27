@@ -137,13 +137,13 @@ query-5:
 # ─── Testing ─────────────────────────────────────────────────────────────────
 
 test:
-	docker compose run --rm pipeline python -m pytest tests/ -v --tb=short
+	docker compose run --rm --build --entrypoint python pipeline -m pytest tests/ -v --tb=short
 
 test-unit:
-	docker compose run --rm pipeline python -m pytest tests/unit/ -v --tb=short
+	docker compose run --rm --build --entrypoint python pipeline -m pytest tests/unit/ -v --tb=short
 
 test-integration:
-	docker compose run --rm pipeline python -m pytest tests/integration/ -v --tb=short
+	docker compose run --rm --build --entrypoint python pipeline -m pytest tests/integration/ -v --tb=short
 
 test-queries:
-	docker compose run --rm pipeline python -m pytest tests/queries/ -v --tb=short
+	docker compose run --rm --build --entrypoint python pipeline -m pytest tests/queries/ -v --tb=short

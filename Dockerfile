@@ -15,6 +15,7 @@ RUN uv venv .venv && \
 
 # Copy application source
 COPY src/ src/
+COPY tests/ tests/
 
 # Install the project itself (editable-style via src layout)
 RUN uv pip install --python .venv/bin/python --no-deps -e .

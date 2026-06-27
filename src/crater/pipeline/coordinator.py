@@ -87,7 +87,7 @@ class PipelineCoordinator:
             except Exception as exc:
                 log.error(
                     "File processing failed — will retry on next poll",
-                    extra={"filename": filename},
+                    extra={"gh_filename": filename},
                     exc_info=exc,
                 )
                 self._metrics.increment("file_processing_errors")
@@ -97,7 +97,7 @@ class PipelineCoordinator:
         await self._writer.flush()
 
     async def _process_file(self, filename: str) -> None:
-        log.info("Processing file", extra={"filename": filename})
+        log.info("Processing file", extra={"gh_filename": filename})
 
         gz_bytes = await self._fetcher.fetch_with_retry(filename)
 
@@ -116,7 +116,7 @@ class PipelineCoordinator:
         self._metrics.gauge("last_file_event_count", event_count)
         log.info(
             "File ingested",
-            extra={"filename": filename, "events": event_count},
+            extra={"gh_filename": filename, "events": event_count},
         )
 
     async def _wait_for_vendor(self) -> None:

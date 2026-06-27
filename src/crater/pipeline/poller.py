@@ -82,7 +82,7 @@ class HourPoller:
             return None
 
         filename = HighWaterMark.hour_to_filename(next_hour)
-        log.debug("Next file to fetch", extra={"filename": filename})
+        log.debug("Next file to fetch", extra={"gh_filename": filename})
         return filename
 
     def hour_from_filename(self, filename: str) -> datetime:

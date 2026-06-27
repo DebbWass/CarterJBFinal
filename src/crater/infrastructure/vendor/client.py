@@ -82,13 +82,13 @@ class VendorHttpClient:
                 if attempt == self._max_retries:
                     log.error(
                         "Vendor request failed after retries",
-                        extra={"filename": filename, "attempts": attempt, "error": str(exc)},
+                        extra={"gh_filename": filename, "attempts": attempt, "error": str(exc)},
                     )
                     raise
                 backoff = min(2**attempt, 30)
                 log.warning(
                     "Vendor request failed, retrying",
-                    extra={"filename": filename, "attempt": attempt, "backoff": backoff},
+                    extra={"gh_filename": filename, "attempt": attempt, "backoff": backoff},
                 )
                 time.sleep(backoff)
 

@@ -58,18 +58,18 @@ class FileFetcher:
                 if truncation_attempts > _MAX_TRUNCATION_RETRIES:
                     log.error(
                         "Max truncation retries exceeded",
-                        extra={"filename": filename, "attempts": truncation_attempts},
+                        extra={"gh_filename": filename, "attempts": truncation_attempts},
                     )
                     raise
                 log.warning(
                     "Truncated response, retrying immediately",
-                    extra={"filename": filename, "attempt": truncation_attempts},
+                    extra={"gh_filename": filename, "attempt": truncation_attempts},
                 )
                 await asyncio.sleep(0.1)
                 continue
 
             if status == 404:
-                log.debug("File not ready (404)", extra={"filename": filename})
+                log.debug("File not ready (404)", extra={"gh_filename": filename})
                 self._metrics.increment("vendor_404s")
                 await asyncio.sleep(self._poll_interval)
                 continue
@@ -77,7 +77,7 @@ class FileFetcher:
             if status == 503:
                 log.warning(
                     "Vendor outage (503), backing off",
-                    extra={"filename": filename, "backoff": outage_backoff},
+                    extra={"gh_filename": filename, "backoff": outage_backoff},
                 )
                 self._metrics.increment("vendor_503s")
                 await asyncio.sleep(outage_backoff)
@@ -93,14 +93,14 @@ class FileFetcher:
                     raise GzipDecompressionError(filename, Exception("gzip validation failed"))
                 log.warning(
                     "Invalid gzip, retrying",
-                    extra={"filename": filename, "attempt": truncation_attempts},
+                    extra={"gh_filename": filename, "attempt": truncation_attempts},
                 )
                 await asyncio.sleep(0.1)
                 continue
 
             outage_backoff = self._outage_backoff
             self._metrics.increment("files_fetched")
-            log.info("File fetched successfully", extra={"filename": filename, "bytes": len(body)})
+            log.info("File fetched successfully", extra={"gh_filename": filename, "bytes": len(body)})
             return body
 
     @staticmethod
