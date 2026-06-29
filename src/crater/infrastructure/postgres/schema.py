@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS push_commits (
     author_email    TEXT,
     sha             TEXT,
     forced          BOOLEAN     NOT NULL DEFAULT FALSE,
-    pushed_at       TIMESTAMPTZ NOT NULL
+    pushed_at       TIMESTAMPTZ NOT NULL,
+    CONSTRAINT pc_event_sha_uniq UNIQUE (event_id, sha)
 );
 """
 

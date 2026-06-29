@@ -15,7 +15,7 @@ INSERT INTO push_commits
      author_email, sha, forced, pushed_at)
 VALUES
     (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-ON CONFLICT DO NOTHING
+ON CONFLICT (event_id, sha) DO NOTHING
 """
 
 
